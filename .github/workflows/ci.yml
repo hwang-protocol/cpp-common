@@ -1,0 +1,22 @@
+# 调用中央流水线 devsecops-pipelines (密钥、Semgrep、CodeQL、普通 / ASan / TSan 测试)
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '0 3 * * 1'   # 每周重扫
+
+permissions:
+  contents: read
+
+jobs:
+  devsecops:
+    # 固定到中央流水线的某个 commit；有新版本时 Dependabot 会提 PR 更新
+    uses: hwang-protocol/devsecops-pipelines/.github/workflows/cpp.yml@486444c5880817268212d495626eadd6e180adcd # main
+    permissions:
+      contents: read
+      security-events: write
+    with:
+      apt-packages: libsqlite3-dev

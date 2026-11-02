@@ -1,0 +1,6 @@
+# 中央流水线 (devsecops-pipelines) 有新 commit 时自动提 PR 更新 SHA
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: weekly }
